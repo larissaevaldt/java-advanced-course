@@ -25,7 +25,7 @@ interface Functionable<T, R> {
     R applyThis(T t);
 }
 
-public class BasicLambdas {
+public class AssignmentOne {
 
     public static void main(String[] args) {
         consumer();
