@@ -1,6 +1,7 @@
 package org.example.collections;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -9,17 +10,19 @@ public class UsingSets {
     public static void main(String[] args) {
         factoryMethods();
         treeSet();
+        hashSet();
+        linkedHashSet();
     }
 
     public static void factoryMethods() {
         // unmodifiable sets returned
-        Set<String> of      = Set.of("a", "b", "c");
-        Set<String> copy    = Set.copyOf(of);
+        Set<String> of = Set.of("a", "b", "c");
+        Set<String> copy = Set.copyOf(of);
 
-        of.add("d");         // UnsupportedOperationException
-        copy.add("d");       // UnsupportedOperationException
+        // of.add("d");         // UnsupportedOperationException
+        // copy.add("d");       // UnsupportedOperationException
 
-        of.remove("a");  // UnsupportedOperationException
+        // of.remove("a");      // UnsupportedOperationException
     }
 
     public static void treeSet() {
@@ -50,14 +53,43 @@ public class UsingSets {
         contactHS.add(new Contact("andrew", 35));
         contactHS.add(new Contact("brian", 36));
         contactHS.add(new Contact("carol", 37));
-        /* Output:
+        /* Output: (order is completely at random, not sorted by name or age, insertion order is not maintained either)
             brian, 36
             andrew, 35
             carol, 37
             alice, 34
             zoe, 45
          */
-        for (Contac contact : contactHS) {
+        for (Contact contact : contactHS) {
+            System.out.println(contact);
+        }
+    }
+
+    public static void linkedHashSet() {
+        // LinkedHashSet
+        // API: This implementation differs from HashSet in that it maintains
+        // a doubly-linked list running through all of its entries. This linked list
+        // defines the iteration ordering, which is the order in which the elements were
+        // inserted into the set (it maintains insertion-order).
+        // This implementation spares its clients from the unspecified, generally
+        // chaotic ordering provided by the HashSet, without incurring the increased cost
+        // associated with TreeSet (TreeSet has to keep them sorted, it takes a little bit longer to store and retrieve)
+        Set<Contact> contactLHS = new LinkedHashSet<>();
+        contactLHS.add(new Contact("zoe", 45));
+        contactLHS.add(new Contact("zoe", 45));  // "zoe" added only once (Set)
+        contactLHS.add(new Contact("alice", 34));
+        contactLHS.add(new Contact("andrew", 35));
+        contactLHS.add(new Contact("brian", 36));
+        contactLHS.add(new Contact("carol", 37));
+
+        /* Output: (order is completely at random, not sorted by name or age, insertion order is not maintained either)
+            zoe, 45
+            alice, 34
+            andrew, 35
+            brian, 36
+            carol, 37
+         */
+        for (Contact contact : contactLHS) {
             System.out.println(contact);
         }
     }

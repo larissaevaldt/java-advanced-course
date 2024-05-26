@@ -101,3 +101,11 @@ Does not extend from Collection:
   2. Find the object using equals()
 * Thus, hashCode() and equals() are linked when using has based collections.
 * Therefore, if you are using a collection with "hash" in its name and you override hashCode(), you must override equals() also (and vice versa).
+* Briefly, equal objects should have the same hashCode, whether an object is equal is up to you, the developer.
+* The whole idea is of you put an object into a bucket, you don't need to keep that exact same object around to be able to retrieve it later on, it could go out of scope and you don't mind, as long as you can recreate the object with the same instance variables then it's ok. You can recreate another object later on with the same instance variables and because equal objects should have the same hashCode, it will go in and find the object in the same bucket, so you should use the same instance variables that are used in the equals method in the calculation of the hashCode;  
+
+##### In short: 
+* *Set* allows no duplicates
+* TreeSet - sorted.
+* HashSet - hashing, unordered.
+* LinkedHashSet - hashing, insertion order.
