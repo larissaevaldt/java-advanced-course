@@ -109,3 +109,40 @@ Does not extend from Collection:
 * TreeSet - sorted.
 * HashSet - hashing, unordered.
 * LinkedHashSet - hashing, insertion order.
+
+
+### Map
+* Maps keys to values; keys are unique; each key can map to at most one value.
+  * HashMap
+    * unsorted, unordered Map.
+    * uses the hashcode of the object being inserted; the more efficient your hashCode() implementation, the better access performance you will get.
+    * use this class when you want a Map and you don't care about order when you iterate through it.
+    * allows one *null* key and multiple *null* values.
+  * LinkedHashMap
+    * maintains insertion order
+  * TreeMap
+    * a sorted Map; sorted by natural order (i.e. alphabetical for strings) of its keys or by a custom order (via a comparator).
+  * HashTable
+    * similar to HashMap except Hashtable is thread-safe (slower as a result of the synchronized call that it's got to put in) and nulls are not allowed.
+
+
+#### Popular Map Methods
+| output             | method signature                 | description                                                                                                 |
+|--------------------|----------------------------------|-------------------------------------------------------------------------------------------------------------|
+| void               | clear()                          | removes all keys and values from the map                                                                    |
+| boolean            | containsKey(Object key)          | is the key in the map                                                                                       |
+| boolean            | containsKey(Object value)        | is this value in the map                                                                                    |
+| Set<Map.Entry<K,V> | entrySet()                       | returns a Set view of the key/value pairs                                                                   |
+| void               | forEach(BiConsumer(key, value))  | perform the given BiConsumer on each entry in the map                                                       |
+| V                  | get(Object key)                  | returns the value for the specified key or null if no mapping exists                                        |
+| boolean            | isEmpty()                        | is the map empty                                                                                            |
+| Set<K>             | keySet()                         | returns a Set view of all the keys in the map                                                               |
+| V                  | put(K key, V value)              | adds or replaces the key/value pair. Returns previous value or null.                                        |
+| V                  | putIfAbsent(K key, V value)      | adds the key/value pair if the key is not already there and returns null; otherwise returns existing value. |
+| V                  | remove(Object key)               | removes the value if the key exists and returns the value that was there; returns null if key not in map.   |
+| V                  | replace(K key, V value)          | replaces the value for the key and returns the old value; return null if key not in map                     |
+| void               | replaceAll(BiFunction<K,V,V> fn) | replaces each value with the results of the function.                                                       |
+| int                | size()                           | how many key/value pairs in the map.                                                                        |
+| Collection<V>      | values()                         | returns a Collection view of all the values.                                                                |
+
+
