@@ -146,3 +146,56 @@ Does not extend from Collection:
 | Collection<V>      | values()                         | returns a Collection view of all the values.                                                                |
 
 
+### Queue
+* Queue - a collection that specifies the order in which the elements are to be processed.
+  * Typically, the order is FIFO (First In First Out).
+  * Exceptions are priority queues (order is natural ordering or according to a supplied comparator) and LIFO (Last In First Out) queues (stacks).
+  * LinkedList
+    * as LinkedList implements Queue; basic queues can be handled with a LinkedList.
+  * PriorityQueue
+    * orders the elements relative to each other such that "priority-in, priority-out" (as opposed to a FIFO or LIFO).
+    * the elements are either compared by natural order or by a custom order via a comparator.
+    * elements that are sorted first will be accessed first.
+* Deque
+  * "double ended queue" and is pronounced "deck"
+  * access from both ends permitted.
+  * can be used as both FIFO (queue) and LIFO (stack)
+  * ArrayDeque
+    * expandable-array implementation of the Deque interface (no capacity restrictions)
+    * API: "likely to be faster than Stack when used as a stack, and faster than LinkedList when used as a queue"
+
+#### Popular Queue Methods
+|         | Throws exception | Returns special value |
+|---------|------------------|-----------------------|
+| Examine | element()        | peek()                |
+| Insert  | add(e)           | offer(e)              |
+| Remove  | remove()         | poll()                |
+
+**Note:** the most common methods are peek(), offer() and poll() as they do not throw exceptions. POP is useful for remembering them.
+
+#### Popular Deque Methods
+* Head (First Element)
+
+|         | Throws exception | Returns special value |
+|---------|------------------|-----------------------|
+| Examine | getFirst()       | peekFirst()           |
+| Insert  | addFirst(e)      | offerFirst(e)         |
+| Remove  | removeFirst()    | pollFirst()           |
+
+* Tail (Last Element)
+
+|         | Throws exception | Returns special value |
+|---------|------------------|-----------------------|
+| Examine | getLast()        | peekLast()            |
+| Insert  | addLast(e)       | offerLast(e)          |
+| Remove  | removeLast()     | pollLast()            |
+
+##### Using Deque as a queue
+* Examine:        peekFirst()
+* Insert (end):   offerLast(e)
+* Remove (front): pollFirst()
+
+##### Using Deque as a stack - Beginning of deque is the "top" of the stack
+* Examine:        peek()   is  **getFirst()**
+* Insert (end):   push(e)  is  **addFirst()**
+* Remove (front): pop()    is  **removeFirst()**
