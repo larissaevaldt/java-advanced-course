@@ -58,3 +58,25 @@ objects.add("This is a String");
     * *list* is a method parameter that can handle lists of *Integer*, or any super type of *Integer*.
   * known as "*lower bounded wildcards*" - **restricts the unknown type to be a specific type or a super type of that type**.
   * safe to add to the collection
+
+### Generic Classes
+* We can add generics to our own types (classes and interfaces)
+* The syntax is to declare a formal type parameter in angle brackets.
+* This can be seen in the API:
+  * *public interface List<**E**>* with:
+    *   *boolean add(**E** e)*
+* The "E" above is a placeholder for the type you pass in e.g. *List<String>* where *String* replaces E.
+
+#### Naming Conventions
+* Can be anything but the convention is to use single uppercase letters.
+* E is for element; T is for a generic type
+* K is a map key; V is a map value
+* N is a number
+* S, U, V are for multiple generic types
+
+### Generic Interfaces
+* Interfaces can declare formal type parameter also.
+
+### Generic Methods
+* Formal type parameters can also be used on methods.
+* The generic marker (formal type parameter) is declared just before the return type. Note that the return type can also incorporate the generic marker (which can make the code tricky)
