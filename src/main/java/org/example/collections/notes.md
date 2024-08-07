@@ -254,3 +254,63 @@ Does not extend from Collection:
 ### binarySearch()
 * binarySearch() requires a sorted *List*
 * As with sort(), if you don't want natural order, you can pass in a comparator.
+
+## equals() and hashCode()
+
+### equals()
+* Comparing two object references using the == operator evaluates to *true* only when both references refer to the same object i.e. == compares the bits in the reference variables themselves, and they are either equal or they are not.
+* The *equals()* in *Object* behaves in the same way i.e. *equals()* in *Object* uses only the == operator for comparisons.
+  * Person p1 = new Person();   p1 reference -> Person Object
+  * Person p2 = new Person();   p2 reference -> Person Object
+* The *String* class has overridden *equals()*, which it inherits from *Object*, so that you can compare two different *String* **objects** to see if their contents are meaningfully equivalent.
+* When you need to know if two references are identical, use ==
+* When you need to know if two objects themselves (not the references) are equal, use the *equals()* method
+* Bear in mind that we will be storing objects (as keys) in Collections (such as HashMap) and searching/retrieving these objects again later.
+* For example, assume we do **not** override *equals()* and we store an object of that type in a Collection and later attempt to retrieve it - we are in trouble unless we have a reference to the exact object we used when storing the key.
+* This is because the search for the key/object will be based on Object::equals() which, as we know, uses == on the references for equality testing.
+* Whereas, if you override *equals()*, when you need to search for an object X, you can just re-create a *new* instance that is meaningfully equivalent to X and use that instance for the search.
+* If you want objects of your class to be used as elements in any data structure that uses equivalency for searching for, and/or retrieving an object, then you must override *equals()* **so that two different instances can be considered the same.**
+* That way, you can use one instance when you **add** it to a Collection and essentially re-create an identical instance when you want to do a **search** based on that object as a key.
+#### In summary:
+* *Obejct::equals()* checks if two references are equal i.e. do they refer to the same object?
+* typically, this is not what you want, so you must override equals()
+* the *Obejct* passed in must be a downcast to the relevant type; to do this safely use *instaceof*.
+* Remember that *toString()*, *equals()* and *hashCode()* are all **public**. Therefore, the following is an illegal override:
+  * class Foo{ boolean equals(Object o){return true;}} // should be **public**
+* The following is also an illegal override:
+  * class Foo{ boolean equals(Foo f){return true;}} // parameter should be **Object** not **Foo**
+
+### hashCode()
+* If two objects are considered equal using *equals()* method, then they must have identical hashcode values. If you override *equals()*, override *hashCode()* as well.
+* Hashcodes are used for improving performance in hash based collections e.g. *HashSet*, *HashMap*. The hashcode value is used to determine how the object should be *stored* in the collection and the hashcode is used again to help *locate* the object in the collection.
+#### Understanding Hashing
+* Hashing is similar to putting items in buckets:
+  * the hashcode value determines which bucket the object is **stored** in and later on, the hashcode value determines which bucket is **searched** to locate the object.
+  * hashcodes are not necessarily unique so several objects can land in the same bucket; this is where *equals()* comes into play - the correct object is then located by using the *equals()* method
+1. find the right bucket (with *hashCode()*)
+2. search the bucket for the right element (using *equals()*)
+
+* Thus, for an object to be located, the search object and the object in the collection **must** have the same hashcode and return *true* for *equals()*
+* The default *hashCode()* method in *Object* always comes up with a unique number for each object, even if the *equals()* method is overridden and states that two or more objects are equal.
+* In other words, it does not matter how equal they are if their hashcodes do not reflect that (as you will be directed to the wrong bucket). Therefore, the *hashCode()* contract states that, **if two objects are equal, their hashcodes must be equal as well**.
+* When calculating the hashcode in *hashCode()*, make sure to use the same instance variables that you used in *equals()*. Therefore, if two objects are equal (based on their instance variables), then the two objects will have the same hashcode value.
+* **Note**: do not use *transient* instance variables in the hashcode calculations as these are not serialised.
+* For example, if a *transient* variable has 10 as its value at the time you *store* the object in a *HashMap*, then you serialise the object to disk (*transient* not serialised); you then deserialize the object, the *transient* variable will get a default value e.g. 0 and therefore the hashcode value will be different when you go to *locate* that object (i.e. wrong bucket)
+
+#### Example
+* Assume we are storing names according to the following hashing calculation algorithm: A=1, B=2 etc...
+* The numbers associated with each letter are added together to give the hashcode (bucket number)
+  * Bob = B(2) + O(15) + B(2) = 19
+  * Amy = A(1) + M(13) + Y(25) = 39
+  * May  = M(13) + A(1) + Y(25) = 39
+* 39 -> "Amy", "May"
+* 19 -> "Bob"
+
+#### Hashcode summary
+* *hashCode()* contract:
+  * the "contract" states that "*two equal objects must have the same hashCode()*"
+* *public int hashCode()* :
+  * by default, *hashCode()* in *Object* returns a unique integer for objects.
+  * to be certain that your objects can be used in Collections that use hashing, you must override both *equals()* and *hashCode()* as both are used - *hashCode()* to find the bucket and *equals()* to find the object in the bucket.
+  * the instance variables used in *equals()* must be the used in *hashCode()*; that way equal objects will return the same hashcode integer value.
+
