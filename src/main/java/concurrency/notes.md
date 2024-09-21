@@ -52,5 +52,11 @@
 * A Future<V> is used to obtain the results from a Callable's call() method.
 * A Future<V> object represents the result of an asynchronous computation. Methods are provided to check if the computation is complete (isDone()) and to retrieve the result of that computation (get()).
 * The result can only be retrieved using the V get() when the computation has completed, blocking if necessary until it is ready.
-* 
+
+### Scheduling tasks
+* Executors exists that enable us to schedule tasks to be performed at some time in the future.
+* In addition, tasks can be scheduled to occur repeatedly at a particular interval.
+* To create scheduled executors, use the *Executors* utility class:
+  * ScheduledExecutorService newSingleThreadScheduledExecutor()
+  * ScheduledExecutorService newScheduledThreadPool()
 
