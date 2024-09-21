@@ -1,5 +1,6 @@
 package localisation;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -12,6 +13,7 @@ public class LocalisingNumbers {
         formatCurrencies();
         parseNumbers();
         parseCurrencies();
+        customFormats();
     }
 
     public static void formatNumbers() {
@@ -58,5 +60,16 @@ public class LocalisingNumbers {
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static void customFormats() {
+        // DecimalFormat specifies the custom format
+        // # means leave it out if we don't have a digit in this position
+        // 0 means insert 0 if we don't have a digit in this position
+        // format number ---> string
+        double n = 77_000.17;
+
+        System.out.println(new DecimalFormat("€#,###,###.#").format(n));   // €77,000.2
+        System.out.println(new DecimalFormat("€0,000,000.0").format(n));   // €0,077,000.2
     }
 }
