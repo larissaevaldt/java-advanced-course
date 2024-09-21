@@ -21,3 +21,11 @@
   * getNumberInstance(), getNumberInstance(locale)
   * getCurrencyInstance(), getCurrencyInstance(locale)
 * Once you have the *NumberFormat* instance you require, you can invoke *format()* to convert a number to a *String* and *parse()* to convert a *String* into a number.
+
+## Localising Dates
+* Date format vary by locale
+* The *DateTimeFormatter* contains factory methods to obtain formatters for dates (and times) for the current locale:
+    * DateTimeFormatter.ofLocalizedDate(dateStyle)
+    * DateTimeFormatter.ofLocalizedTime(timeStyle)
+    * DateTimeFormatter.ofLocalizedDateTime(dateTimeStyle)
+* To customise for a specific locale, append *withLocale(locale)*
