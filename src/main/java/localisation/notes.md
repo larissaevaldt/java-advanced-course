@@ -13,3 +13,11 @@
   * builder design pattern
     * flexible - specify the properties you want, in any order
     * locale is built at the end
+
+## Localising Numbers and Currencies
+* Currencies and numbers differ between locales.
+* The *NumberFormat* class has several *static* factory methods that enable us to both in both directions i.e. from a *String* to a number and a number to a *String*
+  * getInstance(), getInstance(locale)
+  * getNumberInstance(), getNumberInstance(locale)
+  * getCurrencyInstance(), getCurrencyInstance(locale)
+* Once you have the *NumberFormat* instance you require, you can invoke *format()* to convert a number to a *String* and *parse()* to convert a *String* into a number.
