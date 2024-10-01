@@ -28,3 +28,12 @@
 * For example, why run an operation on a piece of data if the operation is not required:
   * we have found the data element we were looking for
   * we may have a limit set on the number of elements we want to operate on.
+
+## Creating a Stream from an Array
+* *Arrays.stream()* can be used to stream an array.
+
+## Creating a Stream from a Collection
+* The default Collection interface method *stream()* is used.
+
+## Creating a Stream from a Collection
+* *Stream.of()* is a static generically-typed utility method that accepts a varargs parameter and returns an ordered stream of those values.

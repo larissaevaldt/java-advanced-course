@@ -29,3 +29,9 @@
     * DateTimeFormatter.ofLocalizedTime(timeStyle)
     * DateTimeFormatter.ofLocalizedDateTime(dateTimeStyle)
 * To customise for a specific locale, append *withLocale(locale)*
+
+## Category enums
+* When you change the default locale with *Locale.setDefault()*, certain option regarding display and formatting are set automatically.
+* We can set these options individually ourselves using the Locale.Category enums: DISPLAY and FORMAT.
+  * DISPLAY - relates to display information
+  * FORMAT - formatting currencies, dates and numbers.
